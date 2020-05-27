@@ -20,12 +20,7 @@ class CommunityLink extends Model
 
     public static function comeFrom(User $user)
     {
-        $link = new static();
-        $link->user_id = $user->id;
-
-        $link->channel_id = 1;
-
-        return $link;
+        return new static(['user_id' => $user->id]);
     }
 
     public function contribute($attributes)

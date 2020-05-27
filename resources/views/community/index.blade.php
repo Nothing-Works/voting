@@ -10,6 +10,8 @@
                         @foreach($links as $link)
                             <a href="{{$link->link}}" target="_blank">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span class="badge badge-primary badge-pill"
+                                          style="background-color: {{$link->channel->color}}">{{$link->channel->title}}</span>
                                     {{$link->title}}
                                     <a href="#">
                                     <span class="badge badge-primary badge-pill">
@@ -23,7 +25,9 @@
                     </ul>
                 </div>
             </div>
-            @include('community._linksForm')
+            @auth
+                @include('community._linksForm')
+            @endauth
         </div>
     </div>
 @endsection
