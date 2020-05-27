@@ -23,21 +23,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-4">
-                <h3>Contribute a Link</h3>
-                <form method="POST" action="/community">
-                    @csrf
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" placeholder="what is the title of your link" class="form-control" id="title">
-                    </div>
-                    <div class="form-group">
-                        <label for="link">Link</label>
-                        <input type="text" class="form-control" name="link" id="link" placeholder="what is the url">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+            @include('community._linksForm')
         </div>
     </div>
 @endsection

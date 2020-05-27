@@ -23,7 +23,12 @@ class CommunityLinkController extends Controller
 
     public function store(Request $request)
     {
-        CommunityLink::comeFrom(auth()->user())->contribute($request->all());
+        $attributes = $request->validate([
+            'title' => 'required',
+            'link' => 'required|active_url',
+        ]);
+
+        CommunityLink::comeFrom(auth()->user())->contribute($attributes);
 
         return back();
     }
