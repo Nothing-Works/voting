@@ -21,13 +21,11 @@ class CommunityLinkController extends Controller
     {
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        CommunityLink::comeFrom(auth()->user())->contribute($request->all());
+
+        return back();
     }
 
     /**

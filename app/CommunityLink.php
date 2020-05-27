@@ -17,4 +17,19 @@ class CommunityLink extends Model
     {
         return $this->belongsTo(Channel::class);
     }
+
+    public static function comeFrom(User $user)
+    {
+        $link = new static();
+        $link->user_id = $user->id;
+
+        $link->channel_id = 1;
+
+        return $link;
+    }
+
+    public function contribute($attributes)
+    {
+        return $this->fill($attributes)->save();
+    }
 }

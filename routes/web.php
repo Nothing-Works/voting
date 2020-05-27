@@ -21,4 +21,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('community', 'CommunityLinkController@index');
-Route::post('community', 'CommunityLinkController@store');
+Route::post('community', 'CommunityLinkController@store')->middleware('auth');

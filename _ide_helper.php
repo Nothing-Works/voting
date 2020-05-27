@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.13.0 on 2020-05-26 23:51:33.
+ * Generated for Laravel 7.13.0 on 2020-05-27 03:20:17.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -19261,6 +19261,13 @@ namespace Illuminate\Support {
     class Fluent {}
 }
 
+namespace App {
+    /**
+    * @method \Illuminate\Database\Eloquent\Collection|Channel[]|Channel create($attributes = [])
+    * @method \Illuminate\Database\Eloquent\Collection|Channel[]|Channel make($attributes = [])
+    */
+    class ChannelFactoryBuilder extends \Illuminate\Database\Eloquent\FactoryBuilder {}
+}
 namespace App {
     /**
     * @method \Illuminate\Database\Eloquent\Collection|CommunityLink[]|CommunityLink create($attributes = [])
