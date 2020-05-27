@@ -20,11 +20,23 @@ class CommunityLink extends Model
 
     public static function comeFrom(User $user)
     {
-        return new static(['user_id' => $user->id]);
+        $link = new static();
+        $link->user_id = $user->id;
+
+        if ($user->isTrusted()) {
+            $link->approve();
+        }
+
+        return $link;
     }
 
     public function contribute($attributes)
     {
         return $this->fill($attributes)->save();
+    }
+
+    private function approve()
+    {
+        $this->approved = true;
     }
 }

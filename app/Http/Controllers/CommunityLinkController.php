@@ -13,7 +13,7 @@ class CommunityLinkController extends Controller
         return view(
             'community.index',
             [
-                'links' => CommunityLink::paginate(25),
+                'links' => CommunityLink::where('approved', 1)->paginate(25),
                 'channels' => Channel::orderBy('title', 'asc')->get(),
             ]
         );

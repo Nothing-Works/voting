@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">Community Links</div>
                     <ul class="list-group">
-                        @foreach($links as $link)
+                        @forelse($links as $link)
                             <a href="{{$link->link}}" target="_blank">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <span class="badge badge-primary badge-pill"
@@ -21,7 +21,9 @@
                                     </a>
                                 </li>
                             </a>
-                        @endforeach
+                        @empty
+                            <h2>No links here</h2>
+                        @endforelse
                     </ul>
                 </div>
             </div>
