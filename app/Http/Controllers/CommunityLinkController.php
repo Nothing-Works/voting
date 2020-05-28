@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\CommunityLink;
+use App\Exceptions\CommunityLinkAlreadySubmitted;
+use App\Http\Requests\CommunityLinkForm;
 use Illuminate\Http\Request;
 
 class CommunityLinkController extends Controller
@@ -13,7 +15,7 @@ class CommunityLinkController extends Controller
         return view(
             'community.index',
             [
-                'links' => CommunityLink::where('approved', 1)->paginate(25),
+                'links' => CommunityLink::where('approved', 1)->latest('updated_at')->paginate(25),
                 'channels' => Channel::orderBy('title', 'asc')->get(),
             ]
         );
@@ -28,20 +30,24 @@ class CommunityLinkController extends Controller
     {
     }
 
-    public function store(Request $request)
+    public function store(CommunityLinkForm $request)
     {
-        $attributes = $request->validate([
-            'channel_id' => 'required|exists:channels,id',
-            'title' => 'required',
-            'link' => 'required|active_url|unique:community_links',
-        ]);
+//        $attributes = $request->validate([
+//            'channel_id' => 'required|exists:channels,id',
+//            'title' => 'required',
+//            'link' => 'required|active_url',
+//        ]);
 
-        CommunityLink::comeFrom(auth()->user())->contribute($attributes);
+        try {
+            $request->persist();
 
-        if (auth()->user()->isTrusted()) {
-            flash('Thanks for the contribution!')->success();
-        } else {
-            flash()->overlay('This contribution will be approved shortly.', 'Thanks!');
+            if (auth()->user()->isTrusted()) {
+                flash('Thanks for the contribution!')->success();
+            } else {
+                flash()->overlay('This contribution will be approved shortly.', 'Thanks!');
+            }
+        } catch (CommunityLinkAlreadySubmitted $e) {
+            flash('We will instead bump the timestamps and bring that link back to the top.')->error();
         }
 
         return back();

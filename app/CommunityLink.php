@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Exceptions\CommunityLinkAlreadySubmitted;
 use Illuminate\Database\Eloquent\Model;
 
 class CommunityLink extends Model
@@ -30,9 +31,27 @@ class CommunityLink extends Model
         return $link;
     }
 
+    /**
+     * @param mixed $attributes
+     *
+     * @throws CommunityLinkAlreadySubmitted
+     *
+     * @return bool
+     */
     public function contribute($attributes)
     {
+        if ($existing = $this->hasAlreadyBeenSubmitted($attributes['link'])) {
+            $existing->touch();
+
+            throw new CommunityLinkAlreadySubmitted();
+        }
+
         return $this->fill($attributes)->save();
+    }
+
+    private function hasAlreadyBeenSubmitted($link): CommunityLink
+    {
+        return static::where('link', $link)->first();
     }
 
     private function approve()
