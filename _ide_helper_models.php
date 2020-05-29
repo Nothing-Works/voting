@@ -49,6 +49,8 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Channel $channel
  * @property-read \App\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\CommunityLinkVote[] $votes
+ * @property-read int|null $votes_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink forChannel($channel)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink newQuery()
@@ -63,6 +65,27 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink whereUserId($value)
  */
 	class CommunityLink extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\CommunityLinkVote
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $community_link_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote whereCommunityLinkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLinkVote whereUserId($value)
+ */
+	class CommunityLinkVote extends \Eloquent {}
 }
 
 namespace App{

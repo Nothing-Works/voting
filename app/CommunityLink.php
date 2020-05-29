@@ -19,6 +19,11 @@ class CommunityLink extends Model
         return $this->belongsTo(Channel::class);
     }
 
+    public function votes()
+    {
+        return $this->hasMany(CommunityLinkVote::class, 'community_link_id');
+    }
+
     public static function comeFrom(User $user)
     {
         $link = new static();

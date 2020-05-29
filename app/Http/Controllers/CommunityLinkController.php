@@ -15,7 +15,7 @@ class CommunityLinkController extends Controller
         return view(
             'community.index',
             [
-                'links' => CommunityLink::forChannel($channel)->where('approved', 1)->latest('updated_at')->paginate(3),
+                'links' => CommunityLink::with('votes')->where('approved', 1)->latest('updated_at')->paginate(3),
                 'channels' => Channel::orderBy('title', 'asc')->get(),
                 'channel' => $channel,
             ]
