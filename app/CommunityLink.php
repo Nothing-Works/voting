@@ -49,6 +49,15 @@ class CommunityLink extends Model
         return $this->fill($attributes)->save();
     }
 
+    public function scopeForChannel($builder, $channel)
+    {
+        if ($channel) {
+            return $builder->where('channel_id', $channel->id);
+        }
+
+        return $builder;
+    }
+
     private function hasAlreadyBeenSubmitted($link): CommunityLink
     {
         return static::where('link', $link)->first();

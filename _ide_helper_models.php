@@ -49,6 +49,7 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Channel $channel
  * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink forChannel($channel)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\CommunityLink query()
