@@ -36,9 +36,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function voteFor(CommunityLink $link)
+//    public function voteFor(CommunityLink $link)
+//    {
+//        return $this->votes()->attach($link);
+//    }
+
+//    public function unvoteFor(CommunityLink $link)
+//    {
+//        return $this->votes()->detach($link);
+//    }
+
+    public function votes()
     {
-        return $link->votes()->create(['user_id' => $this->id]);
+        return $this->belongsToMany(CommunityLink::class, 'community_links_votes')->withTimestamps();
     }
 
     public function votedFor(CommunityLink $link)
@@ -49,6 +59,14 @@ class User extends Authenticatable
     public function isTrusted()
     {
         return $this->trusted;
+    }
+
+    public function toggleVoteFor(CommunityLink $link)
+    {
+        CommunityLinkVote::firstOrNew([
+            'user_id' => $this->id,
+            'community_link_id' => $link->id,
+        ])->toggle();
     }
 
     public function links()
