@@ -12,7 +12,7 @@ class CommunityLinksQuery
         $orderBy = $orderByPopular ? 'votes_count' : 'updated_at';
 
         return CommunityLink::forChannel($channel)
-            ->with('votes', 'user', 'channel')
+            ->with('user', 'channel')
             ->where('approved', 1)
             ->withCount('votes')
             ->orderBy($orderBy, 'desc')

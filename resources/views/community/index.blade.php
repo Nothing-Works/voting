@@ -8,6 +8,12 @@
                 @if ($channel)
                     <h2>{{$channel->title}}</h2>
                 @endif
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a href="{{request()->url()}}"
+                                            class="nav-link {{request('popular')? '':'active'}}">Most Recent</a></li>
+                    <li class="nav-item"><a href="?popular=1" class="nav-link {{request('popular')? 'active':''}}">Most
+                            Popular</a></li>
+                </ul>
                 @include('community.list')
             </div>
             @auth
