@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Exceptions\CommunityLinkAlreadySubmitted;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class CommunityLink extends Model
@@ -54,7 +55,7 @@ class CommunityLink extends Model
         return $this->fill($attributes)->save();
     }
 
-    public function scopeForChannel($builder, $channel)
+    public function scopeForChannel(Builder $builder, $channel)
     {
         if ($channel) {
             return $builder->where('channel_id', $channel->id);

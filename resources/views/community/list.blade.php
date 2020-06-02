@@ -5,7 +5,8 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <form action="/votes/{{$link->id}}" method="POST">
                     @csrf
-                    <button class="btn btn-info {{Auth::check() && Auth::user()->votedFor($link) ? "btn-danger" : ""}}">{{$link->votes->count()}}</button>
+                    <button
+                        class="btn btn-info {{Auth::check() && Auth::user()->votedFor($link) ? "btn-danger" : ""}}">{{$link->votes->count()}}</button>
                 </form>
                 <a href="/community/{{$link->channel->slug}}">
                         <span class="badge badge-primary badge-pill"
@@ -25,4 +26,4 @@
         @endforelse
     </ul>
 </div>
-{{$links->links()}}
+{{$links->withQueryString()->links()}}

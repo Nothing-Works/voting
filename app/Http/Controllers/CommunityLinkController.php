@@ -6,6 +6,7 @@ use App\Channel;
 use App\CommunityLink;
 use App\Exceptions\CommunityLinkAlreadySubmitted;
 use App\Http\Requests\CommunityLinkForm;
+use App\Queries\CommunityLinksQuery;
 use Illuminate\Http\Request;
 
 class CommunityLinkController extends Controller
@@ -15,7 +16,7 @@ class CommunityLinkController extends Controller
         return view(
             'community.index',
             [
-                'links' => CommunityLink::with('votes')->where('approved', 1)->latest('updated_at')->paginate(3),
+                'links' => (new CommunityLinksQuery())->get(request('popular'), $channel),
                 'channels' => Channel::orderBy('title', 'asc')->get(),
                 'channel' => $channel,
             ]
